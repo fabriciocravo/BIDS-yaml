@@ -1,0 +1,16 @@
+
+dataset_description.json:
+  Name: test
+  BIDSVersion: "1.10.0"
+
+participants.tsv: |
+  participant_id	age
+  sub-01	25
+
+sub-01:
+  anat:
+    sub-01_T1w.nii.gz:
+    sub-01_T1w.json:
+      RepetitionTime: 2.0
+  func:
+    sub-01_task-rest_bold.nii.gz:
