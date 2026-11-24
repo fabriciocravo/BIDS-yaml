@@ -9,6 +9,14 @@ description: Use only when the user types "yaml-workflow" or asks to run the yam
 - This skill is part of the repo, so the repo is already present. Work from its root.
 - If the user gave a path to a different copy, use that copy. Check that `bids-yaml.py` exists there. If it doesn't, say so and ask for a corrected path.
 
+## Requirements
+
+Check these before the first run. Ask the user before installing anything.
+- Python packages: if `requirements.txt` exists, install it with `pip install -r requirements.txt`.
+- `deno` must be on `PATH`, because the validator step calls it by name. Check with `deno --version`. If it is missing, install it with `npm install -g deno`. On macOS the user can instead run `brew install deno` in their own Terminal, since the shells Claude uses are Linux and have no Homebrew.
+- `python3` (3.10 or newer, with `venv`) and `git` are assumed present. Do not check or install them unless a run fails because of them.
+- Network access to github.com, PyPI and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
+
 ## Before running anything
 List the files in `dataset_yamls/`, then ask in one message:
 - Which YAML file to use (a name from the list, or a full path).
