@@ -35,11 +35,12 @@ def validate_dataset(dataset_dir):
     # checking it with the schema.json built above.
     # Schema is passed as a file:// URI, which handles spaces in the path.
     # check=False: the validator exits non-zero when it finds dataset errors,
-    # so the result is returned for the caller to read, not raised.
+    # so the text is returned for the caller to read, not raised.
     command = [
         'deno', 'run', '-ERWN', 'jsr:@bids/validator',
         '-v', '--ignoreNiftiHeaders',
         '-s', SCHEMA_OUTPUT.as_uri(),
         str(dataset_dir),
     ]
-    return subprocess.run(command)
+    result = subprocess.run(command, capture_output=True, text=True)
+    return result.stdout
