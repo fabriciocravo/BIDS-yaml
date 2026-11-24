@@ -45,7 +45,21 @@ def fix_fork(repo_url):
         run_subprocess(command)
 
 
-def fix_branch(repo_url)
+def fix_branch(branch_name):
+    # Fetches the remote branches
+    # Switches the spec clone to the requested branch
+    spec = str(SPEC_DIR)
+    commands = [
+        ['git', '-C', spec, 'fetch', 'origin'],
+        ['git', '-C', spec, 'switch', branch_name],
+    ]
+    for command in commands:
+        run_subprocess(command)
+
+
+def fix_directory():
+    # Deletes the spec clone (and its .venv) and clones it again
+    run_subprocess(['rm', '-rf', str(SPEC_DIR)])
 
 
 def process_git_errors(error_code, branch_name, repo_url):
@@ -66,9 +80,19 @@ def process_git_errors(error_code, branch_name, repo_url):
             )
             fork_url = stdout.decode().strip()
 
+            stdout, _ = run_subprocess(
+                ['git', '-C', str(SPEC_DIR), 'branch', '--show-current']
+            )
+            current_branch = stdout.decode().strip()
 
         if exists and fork_url != repo_url:
             fix_fork(repo_url)
 
-        pass
-        command = ['git', '-C', SPEC_DIR, 'branch', '--show-current']
+        if exists and current_branch != branch_name:
+            fix_branch(branch_name)
+
+    else:
+        fix_directory()
+        clone_spec(branch_name, repo_url)
+
+
