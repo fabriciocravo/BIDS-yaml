@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 bids-yaml.py:*)",
+      "Read(dataset_yamls/**)",
+      "Write(dataset_yamls/**)"
+    ],
+    "deny": [
+      "Edit(scripts/**)",
+      "Edit(bids-yaml.py)",
+      "Bash(rm:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
