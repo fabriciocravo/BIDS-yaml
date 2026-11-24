@@ -19,7 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('--verbose', default=0)
     args = parser.parse_args()
 
-    Log.set_verbose = args.verbose
+    Log.set_verbose(args.verbose)
     dataset_dir, branch, repo_url = utils.parse_args_bids_yaml(args)
 
     yaml_full_file = Path(dataset_dir, args.yaml_file)

@@ -1,6 +1,8 @@
 # Repo specific
 dataset_cache/*
 !dataset_cache/read_me.txt
+validator_cache/*
+!validator_cache/read_me.txt
 
 # Github template stuff
 # Byte-compiled / optimized / DLL files

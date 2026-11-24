@@ -1,6 +1,6 @@
 import subprocess
 from pathlib import Path
-from ..path_names import VALIDATOR_CACHE, SPEC_DIR, VERBOSE_LEVEL
+from ..path_names import VALIDATOR_CACHE, SPEC_DIR
 from ..loger import Log
 
 
@@ -30,6 +30,8 @@ def run_subprocess(command):
     )
     Log.log(0, message)
 
+    exit()
+
     return (
         returned_output.stdout,
         returned_output.stderr
@@ -39,7 +41,7 @@ def run_subprocess(command):
 def clone_spec(branch, repo_url):
     # Runs from VALIDATOR_CACHE (cwd), so the clone lands inside the cache
     command = ['git', 'clone', '--branch', branch, repo_url]
-    returncode, _, _ = run_subprocess(command)
+    returncode, _ = run_subprocess(command)
     return returncode
 
 

@@ -10,7 +10,7 @@ class Logger:
         self.verbose_level = verbose_level
 
     def set_verbose(self, verbose_level):
-        self.verbose_level = verbose_level
+        self.verbose_level = int(verbose_level)
 
     def log(self, level, message):
         if self.verbose_level > level:

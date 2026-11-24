@@ -17,7 +17,6 @@ def setup_validator_from_git(branch=None, repo_url=None):
     except subprocess.CalledProcessError as e:
         process_git_errors(e.returncode, branch, repo_url)
 
-    exit()
     build_schema()
 
 
