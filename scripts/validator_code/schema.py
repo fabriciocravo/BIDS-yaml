@@ -1,5 +1,5 @@
 import subprocess
-from ..path_names import VALIDATOR_CACHE, SPEC_DIR, VENV_BIN, SCHEMA_OUTPUT
+from ..path_names import SPEC_DIR, VENV_BIN, SCHEMA_OUTPUT
 
 
 def build_schema():
