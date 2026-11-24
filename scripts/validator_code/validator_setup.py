@@ -1,5 +1,5 @@
-import subprocess
-from ..path_names import VALIDATOR_CACHE, BIDS_SPEC_URL
+from ..path_names import BIDS_SPEC_URL
+from .utils import clone_spec
 
 
 def setup_validator_from_git(branch_name=None, repo_url=None, git=True):
@@ -10,9 +10,7 @@ def setup_validator_from_git(branch_name=None, repo_url=None, git=True):
     if branch_name is None:
         branch_name = 'main'
 
-    cd_comand    = 'cd ' + VALIDATOR_CACHE
-    git_command  = f'git clone --branch {branch_name} {repo_url}'
+    clone_spec(branch_name, repo_url)
 
-    # PREPARED SPOT (you): run the clone and decide what git=False does.
+    # PREPARED SPOT (you): decide what git=False does.
     # See the chat for the options and trade-offs.
-
