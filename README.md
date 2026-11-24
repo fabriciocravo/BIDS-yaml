@@ -1,6 +1,6 @@
 
 # Requirements
 
-python3 with venve (and requirements.txt)
-git 
-deno
+- python3 (and requirements.txt)
+- git 
+- deno
