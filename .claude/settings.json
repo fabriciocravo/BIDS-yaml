@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(python3 bids-yaml.py:*)",
-      "Read(dataset_yamls/**)",
+      "Read(./**)",
       "Write(dataset_yamls/**)"
     ],
     "deny": [
