@@ -1,5 +1,5 @@
 import subprocess
-from path_names import VALIDATOR_CACHE
+from ..path_names import VALIDATOR_CACHE
 
 
 def setup_validator_from_git(branch_name, git=True):
