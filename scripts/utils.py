@@ -12,7 +12,7 @@ def parse_args_bids_yaml(args):
         dataset_dir = args.yaml_dir
 
     if args.branch is None:
-        branch = 'main'
+        branch = 'master'
     else:
         branch = args.branch
 

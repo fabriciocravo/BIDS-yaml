@@ -1,6 +1,7 @@
 import subprocess
-import Path
-from ..path_names import VALIDATOR_CACHE, SPEC_DIR
+from pathlib import Path
+from ..path_names import VALIDATOR_CACHE, SPEC_DIR, VERBOSE_LEVEL
+from ..loger import Log
 
 
 def run_subprocess(command):
@@ -20,6 +21,14 @@ def run_subprocess(command):
                 returned_output.returncode,
                 command
             )
+    
+    message = (
+        f"Run subprocess with results:\n"
+        f"returncode: {returned_output.returncode}\n"
+        f"stdout: {returned_output.stdout}\n"
+        f"stderr: {returned_output.stderr}"
+    )
+    Log.log(0, message)
 
     return (
         returned_output.stdout,
@@ -27,9 +36,9 @@ def run_subprocess(command):
     )
 
 
-def clone_spec(branch_name, repo_url):
+def clone_spec(branch, repo_url):
     # Runs from VALIDATOR_CACHE (cwd), so the clone lands inside the cache
-    command = ['git', 'clone', '--branch', branch_name, repo_url]
+    command = ['git', 'clone', '--branch', branch, repo_url]
     returncode, _, _ = run_subprocess(command)
     return returncode
 
@@ -45,13 +54,13 @@ def fix_fork(repo_url):
         run_subprocess(command)
 
 
-def fix_branch(branch_name):
+def fix_branch(branch):
     # Fetches the remote branches
     # Switches the spec clone to the requested branch
     spec = str(SPEC_DIR)
     commands = [
         ['git', '-C', spec, 'fetch', 'origin'],
-        ['git', '-C', spec, 'switch', branch_name],
+        ['git', '-C', spec, 'switch', branch],
     ]
     for command in commands:
         run_subprocess(command)
@@ -62,7 +71,7 @@ def fix_directory():
     run_subprocess(['rm', '-rf', str(SPEC_DIR)])
 
 
-def process_git_errors(error_code, branch_name, repo_url):
+def process_git_errors(error_code, branch, repo_url):
 
     if error_code == 128:
         git_path = Path(VALIDATOR_CACHE, '.git')
@@ -88,11 +97,11 @@ def process_git_errors(error_code, branch_name, repo_url):
         if exists and fork_url != repo_url:
             fix_fork(repo_url)
 
-        if exists and current_branch != branch_name:
-            fix_branch(branch_name)
+        if exists and current_branch != branch:
+            fix_branch(branch)
 
     else:
         fix_directory()
-        clone_spec(branch_name, repo_url)
+        clone_spec(branch, repo_url)
 
 
