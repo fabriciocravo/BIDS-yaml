@@ -10,13 +10,18 @@ A tool for creating and debugging BIDS datasets. Developers write a BIDS dataset
 - `dataset_yamls/`: YAML files that describe datasets.
 - `*_cache/`: temporary folders for cloned repos and generated datasets. These are gitignored; never commit them.
 
-## How to work here
-- Read the skill at `.claude/skills/bids-validator/SKILL.md` before running any script.
-- If the user asks you to clone this repo and does not say they are a developer, follow the standard workflow in the skill and use the hook at [hook location].
-- If the user says they are a developer, skip the standard workflow and work with the scripts directly.
-- Ask before running scripts or changing files outside this repo.
-- Do not commit or push unless the user asks.
+## Workflows
+Each workflow runs only when the user asks for it by its keyword. Otherwise, do not start a workflow; work on what the user asks.
 
-## Skill
-Detailed usage instructions are in `.claude/skills/bids-validator/SKILL.md`.
+```yaml
+workflows:
+  yaml-workflow:
+    skill: .claude/skills/yaml-workflow/SKILL.md
+    purpose: Compile a YAML dataset description and run the validator on it.
+```
 
+The trigger for each workflow is citing the name of the workflow itself. 
+Check .claude/skills for all workflow skills.
+
+## Permissions
+`.claude/settings.json` restricts which commands and edits are allowed in this repo. Do not work around it.
