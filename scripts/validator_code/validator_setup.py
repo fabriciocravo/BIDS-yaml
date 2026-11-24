@@ -1,5 +1,5 @@
 from ..path_names import BIDS_SPEC_URL
-from .utils import clone_spec
+from .git_scripts import clone_spec
 
 
 def setup_validator_from_git(branch_name=None, repo_url=None, git=True):
@@ -10,7 +10,8 @@ def setup_validator_from_git(branch_name=None, repo_url=None, git=True):
     if branch_name is None:
         branch_name = 'main'
 
-    clone_spec(branch_name, repo_url)
+    return_code = clone_spec(branch_name, repo_url)
 
-    # PREPARED SPOT (you): decide what git=False does.
-    # See the chat for the options and trade-offs.
+
+
+    
