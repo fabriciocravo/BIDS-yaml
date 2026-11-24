@@ -13,30 +13,40 @@ description: Use only when the user types "yaml-workflow" or asks to run the yam
 - Check that `bids-yaml.py` exists in the folder. If it doesn't, say so and ask for a corrected path.
 
 ## Requirements
-Check each requirement before the first run, from the repo root.
+The commands run in the Linux VM behind the desktop-app connection. Install everything into that VM. Check each requirement before the first run, from the repo root.
 
-Automatic installation is supported only on macOS with Homebrew at the moment.
-- Check the system with `uname -s` (macOS prints `Darwin`) and `brew --version`. If not, request the user to install Homebrew.
-- On macOS with Homebrew: if something is missing, tell the user what is missing and the command you would use to install it, and install it only after they agree. If an installation fails, give the user the command so they can try it themselves.
-- On any other system, or if Homebrew is missing: do not install anything. List what is missing and ask the user to install it themselves, then wait.
+For each missing requirement, tell the user what is missing and the install command, and install it only after they agree. If an install fails, show the user the error and the command, and stop.
 
-The requirements are:
+### System packages (Python, venv, pip, git)
+These install with `apt-get`, which needs root. First check how to run it:
+- `id -u` prints `0`: you are root. Run the `apt-get` commands as written.
+- Otherwise, `sudo -n true` succeeds: prefix the `apt-get` commands with `sudo`.
+
 1. Python 3.10 or newer, with `venv`
    - Check: `python3 --version` and `python3 -c "import venv"`
-   - Install (macOS): `brew install python`
-2. git
+   - Install: `apt-get update && apt-get install -y python3 python3-venv`
+2. pip
+   - Check: `python3 -m pip --version`
+   - Install: `apt-get install -y python3-pip`
+3. git
    - Check: `git --version`
-   - Install (macOS): `brew install git`
-3. Python packages from `requirements.txt`
+   - Install: `apt-get install -y git`
+4. curl and unzip (needed to install deno)
+   - Check: `command -v curl unzip`
+   - Install: `apt-get install -y curl unzip`
+
+### User packages
+5. Python packages from `requirements.txt`
    - Check: `python3 -c "import pandas, yaml"`
-   - Install (macOS): `python3 -m pip install -r requirements.txt`
+   - Install: `python3 -m pip install --user -r requirements.txt`
    - If the install fails:
      <!-- TODO(Fabricio): what to do when pip refuses or fails -->
-4. deno, on `PATH`, because the validator step calls it by name
-   - Check: `deno --version`
-   - Install (macOS): `brew install deno`
+6. deno, installed in `~/.local/bin`
+   - Check: `PATH="$HOME/.local/bin:$PATH" deno --version`
+   - Install: `curl -fsSL https://deno.land/install.sh | DENO_INSTALL="$HOME/.local" sh -s -- -y`
+   - Run the check again to confirm.
 
-Network access to github.com, PyPI and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
+Network access to github.com, PyPI, deno.land and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
 
 ## Before running anything
 List the files in `dataset_yamls/`, then ask in one message:
