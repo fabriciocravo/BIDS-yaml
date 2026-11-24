@@ -1,7 +1,7 @@
 from ..path_names import BIDS_SPEC_URL
 from .git_scripts import clone_spec, process_git_errors
 import subprocess
-from .schema import build_schema
+from schema import build_schema
 
 
 def setup_validator_from_git(branch_name=None, repo_url=None):

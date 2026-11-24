@@ -1,7 +1,12 @@
 from scripts.dataset_generation.yaml_converter import convert_yaml_to_dataset
+from scripts.validator_code.validator_setup import setup_validator_from_git
+from scripts.validator_code.schema import validate_dataset
 import argparse
-from .scripts import path_names
-import Path 
+from pathlib import Path
+from scripts import utils
+
+
+
 
 if __name__ == '__main__':
   
@@ -12,8 +17,10 @@ if __name__ == '__main__':
     parser.add_argument('--repo-url', default=None)
     args = parser.parse_args()
 
-    if args.yaml_dir is None:
-        pass
+    dataset_dir, branch, repo_url = utils.parse_args_bids_yaml(args)
 
-    yaml_path = Path(path_names.DATASET_YAMLS)
-    convert_yaml_to_dataset()
+    yaml_full_file = Path(dataset_dir, args.yaml_file)
+    convert_yaml_to_dataset(yaml_file=yaml_full_file, full_path=True)
+    setup_validator_from_git(branch=branch, repo_url=repo_url)
+    validate_dataset(dataset_dir)
+    

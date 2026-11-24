@@ -1,5 +1,5 @@
 import os
-import Path
+from pathlib import Path
 
 # Get path names
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

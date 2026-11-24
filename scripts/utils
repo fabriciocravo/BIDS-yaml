@@ -1,0 +1,24 @@
+from scripts.path_names import DATASET_YAMLS
+from .path_names import BIDS_SPEC_URL
+
+
+def parse_args_bids_yaml(args):
+    """
+        Parses arguments given to bids yaml script call
+    """
+    if args.yaml_dir is None:
+        dataset_dir = DATASET_YAMLS
+    else:
+        dataset_dir = args.yaml_dir
+
+    if args.branch is None:
+        branch = 'main'
+    else:
+        branch = args.branch
+
+    if args.repo_url is None:
+        repo_url = BIDS_SPEC_URL
+    else:
+        repo_url = args.repo_url
+
+    return dataset_dir, branch, repo_url
