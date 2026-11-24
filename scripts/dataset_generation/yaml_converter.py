@@ -20,7 +20,7 @@ def convert_yaml_to_dataset(yaml_file, full_path=False):
 
     try:
         dataset_name =\
-            dataset_dict['files']['dataset_description.json']['name']
+            dataset_dict['files']['dataset_description.json']['Name']
     except KeyError as e:
         print(
             f'{e}\n' +
@@ -33,6 +33,8 @@ def convert_yaml_to_dataset(yaml_file, full_path=False):
 
     # DFS start of the exploration
     dfs_yaml(dataset_dict['dataset'], dataset_path, dataset_dict)
+
+    return dataset_path
 
 
 

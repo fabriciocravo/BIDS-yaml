@@ -11,10 +11,13 @@ dataset:
 
 files:
   dataset_description.json:
-    name: test
-    bidsversion: "1.10.0"
+    Name: test
+    BIDSVersion: "1.10.0"
   participants.tsv:
     participant_id: [sub-01]
     age: [25]
     sex: [M]
+  sub-01_T1w.json:
+    TaskName: rest
+    RepetitionTime: 2.0
     

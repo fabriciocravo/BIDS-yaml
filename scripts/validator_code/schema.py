@@ -1,5 +1,7 @@
 import subprocess
 from ..path_names import SPEC_DIR, VENV_BIN, SCHEMA_OUTPUT
+from ..loger import Log
+from pathlib import Path
 
 
 def build_schema():
@@ -19,11 +21,19 @@ def validate_dataset(dataset_dir):
     # Runs the standard BIDS validator (Deno, from JSR) against one dataset,
     # checking it with the schema.json
     # Captures output of subprocess and returns it
+    schema_uri = Path(SCHEMA_OUTPUT).resolve().as_uri()
     command = [
         'deno', 'run', '-ERWN', 'jsr:@bids/validator',
         '-v', '--ignoreNiftiHeaders',
-        '-s', SCHEMA_OUTPUT,
+        '-s', schema_uri,
         str(dataset_dir),
     ]
     result = subprocess.run(command, capture_output=True, text=True)
+
+    if result.returncode != 0 or result.stderr:
+        Log.log(
+            -1,
+            f"Validator error: {result.returncode} - \n{result.stderr}"
+        )
+
     return result.stdout

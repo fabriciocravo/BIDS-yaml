@@ -20,11 +20,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     Log.set_verbose(args.verbose)
-    dataset_dir, branch, repo_url = utils.parse_args_bids_yaml(args)
+    yaml_dir, branch, repo_url = utils.parse_args_bids_yaml(args)
 
-    yaml_full_file = Path(dataset_dir, args.yaml_file)
-    convert_yaml_to_dataset(yaml_file=yaml_full_file, full_path=True)
+    yaml_full_file = Path(yaml_dir, args.yaml_file)
+    dataset_path = convert_yaml_to_dataset(yaml_file=yaml_full_file, full_path=True)
     setup_validator_from_git(branch=branch, repo_url=repo_url)
-    results = validate_dataset(dataset_dir)
+    results = validate_dataset(dataset_path)
     
     print(results, file=sys.stderr)
