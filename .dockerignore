@@ -1,0 +1,14 @@
+# Version control and local environments
+.git
+.venv
+__pycache__/
+*.pyc
+
+# Runtime folders created by the validator
+validator_cache/*
+!validator_cache/read_me.txt
+dataset_cache/*
+!dataset_cache/read_me.txt
+
+# Editor and OS files
+.DS_Store
