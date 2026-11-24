@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(python3 bids-yaml.py:*)",
+      "Bash(pip install -r requirements.txt)",
       "Read(./**)",
       "Write(dataset_yamls/**)"
     ],
