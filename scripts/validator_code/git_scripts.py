@@ -30,8 +30,6 @@ def run_subprocess(command):
     )
     Log.log(0, message)
 
-    exit()
-
     return (
         returned_output.stdout,
         returned_output.stderr
