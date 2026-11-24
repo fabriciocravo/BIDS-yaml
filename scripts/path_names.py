@@ -5,3 +5,6 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATASET_CACHE = os.path.join(ROOT, "dataset_cache")
 DATASET_YAMLS = os.path.join(ROOT, "dataset_yamls")
 VALIDATOR_CACHE = os.path.join(ROOT, "validator_cache")
+
+# Remote locations
+BIDS_SPEC_URL = 'https://github.com/bids-standard/bids-specification.git'
