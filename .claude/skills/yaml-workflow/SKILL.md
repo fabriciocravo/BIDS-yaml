@@ -39,11 +39,9 @@ These install with `apt-get`, which needs root. First check how to run it:
 5. Python packages from `requirements.txt`
    - Check: `python3 -c "import pandas, yaml"`
    - Install: `python3 -m pip install --user -r requirements.txt`
-   - If the install fails:
-     <!-- TODO(Fabricio): what to do when pip refuses or fails -->
 6. deno, installed in `~/.local/bin`
    - Check: `PATH="$HOME/.local/bin:$PATH" deno --version`
-   - Install: `curl -fsSL https://deno.land/install.sh | DENO_INSTALL="$HOME/.local" sh -s -- -y`
+   - Install: `python3 -m pip install --user deno`
    - Run the check again to confirm.
 
 Network access to github.com, PyPI, deno.land and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
