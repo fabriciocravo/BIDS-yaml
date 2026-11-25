@@ -1,6 +1,6 @@
 ---
 name: yaml-workflow
-description: Use only when the user types "yaml-workflow" or asks to run the yaml-workflow. Compiles a YAML dataset description from bids-dev-validator into a BIDS dataset and runs the validator on it. Do not use otherwise.
+description: Use only when the user types "yaml-workflow" or asks to run the yaml-workflow. Compiles a YAML dataset description from BIDS-yaml into a BIDS dataset and runs the validator on it. Do not use otherwise.
 ---
 
 # yaml-workflow
@@ -15,12 +15,13 @@ description: Use only when the user types "yaml-workflow" or asks to run the yam
 ## Requirements
 The commands run in the Linux VM behind the desktop-app connection. Install everything into that VM. Check each requirement before the first run, from the repo root.
 
-For each missing requirement, tell the user what is missing and the install command, and install it only after they agree. If an install fails, show the user the error and the command, and stop.
+For each missing requirement, install it without asking, then tell the user what you installed. If an install fails, show the user the error and the command, and stop.
 
 ### System packages (Python, venv, pip, git)
 These install with `apt-get`, which needs root. First check how to run it:
 - `id -u` prints `0`: you are root. Run the `apt-get` commands as written.
 - Otherwise, `sudo -n true` succeeds: prefix the `apt-get` commands with `sudo`.
+- Otherwise: do not install. Tell the user the requirement is missing and cannot be installed in this environment without root, and stop.
 
 1. Python 3.10 or newer, with `venv`
    - Check: `python3 --version` and `python3 -c "import venv"`
@@ -31,20 +32,17 @@ These install with `apt-get`, which needs root. First check how to run it:
 3. git
    - Check: `git --version`
    - Install: `apt-get install -y git`
-4. curl and unzip (needed to install deno)
-   - Check: `command -v curl unzip`
-   - Install: `apt-get install -y curl unzip`
 
-### User packages
-5. Python packages from `requirements.txt`
+### User packages (installed with pip, no root needed)
+4. Python packages from `requirements.txt`
    - Check: `python3 -c "import pandas, yaml"`
    - Install: `python3 -m pip install --user -r requirements.txt`
-6. deno, installed in `~/.local/bin`
+5. deno, installed in `~/.local/bin`
    - Check: `PATH="$HOME/.local/bin:$PATH" deno --version`
    - Install: `python3 -m pip install --user deno`
    - Run the check again to confirm.
 
-Network access to github.com, PyPI, deno.land and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
+Network access to github.com, PyPI and jsr.io is needed. If the validator step fails fetching `jsr.io`, report it to the user. Do not work around it.
 
 ## Before running anything
 List the files in `dataset_yamls/`, then ask in one message:
@@ -59,8 +57,8 @@ List the files in `dataset_yamls/`, then ask in one message:
 - Save to `dataset_yamls/` only when asked. Never overwrite an existing file.
 
 ## Running the validator
-1. Work from the repo root on the user's computer.
-2. Run `python3 bids-yaml.py <yaml file>`. A bare filename is looked up in `dataset_yamls/`.
+1. Work from the repo root, in the VM.
+2. Run `PATH="$HOME/.local/bin:$PATH" python3 bids-yaml.py <yaml file>`. A bare filename is looked up in `dataset_yamls/`.
 3. Add `--repo-url <url>` and `--branch <name>` only if the user gave them. Otherwise leave them off so the script's defaults apply.
 
 ## Working with the user
