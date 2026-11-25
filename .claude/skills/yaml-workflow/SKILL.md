@@ -12,6 +12,19 @@ description: Use only when the user types "yaml-workflow" or asks to run the yam
 - If the user gave a path to a different copy, use that copy.
 - Check that `bids-yaml.py` exists in the folder. If it doesn't, say so and ask for a corrected path.
 
+## Permissions to confirm before running
+Before the requirement checks, list these permissions and ask the user to confirm them in one message:
+
+1. **Folder access.** Read and write access to the connected BIDS-yaml repo folder.
+2. **Delete access.** The validator's pip install removes temporary files inside `validator_cache/`. Include this in the permissions message, and request delete permission for the repo folder once, up front. Do not start the install or the validator until it's granted. Only delete inside `validator_cache/`.
+3. **Reads.** `bids-yaml.py`, this skill, `CLAUDE.md`, a listing of `dataset_yamls/`, and the YAML file the user picks.
+4. **Writes.** The validator creates `dataset_cache/` and `validator_cache/` inside the repo. Both are git-ignored. Write to `dataset_yamls/` only when the user asks to save a YAML there, and never overwrite an existing file.
+5. **Installs.** Missing system packages go through `apt-get` (root or `sudo` required). Missing Python packages and deno go through `pip --user`. Installs run without a separate confirmation, but report each one afterward.
+6. **Network access.** `github.com`, `pypi.org`, `jsr.io`, and `deno.land` must all be reachable. If one is blocked, report which host and ask user to add permission in the desktop app.
+7. **Command permissions.** The run command must be allowed in `.claude/settings.json`. Both `python3 bids-yaml.py` and the `PATH="$HOME/.local/bin:$PATH" python3 bids-yaml.py` form should be on the allow list.
+
+Don't run `rm` through the shell, even with delete access. The deny list blocks it. Use the desktop app's delete permission instead.
+
 ## Requirements
 The commands run in the Linux VM behind the desktop-app connection. Install everything into that VM. Check each requirement before the first run, from the repo root.
 
