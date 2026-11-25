@@ -48,7 +48,7 @@ Check with `python3 -c "import pandas, yaml"`. No output means it worked.
 
 Check with `deno --version`. If the command isn't found and you used pip, add `~/.local/bin` to your `PATH`. The workflow itself uses `PATH="$HOME/.local/bin:$PATH"` to handle this.
 
-## 5. Clone this repo
+### 5. Clone this repo
 
 ```bash
 git clone https://github.com/fabriciocravo/BIDS-yaml.git
