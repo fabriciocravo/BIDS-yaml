@@ -1,4 +1,4 @@
-# BIDS-yaml
+# BIDS-yaml with LLM workflows
 
 Write a BIDS dataset as a single YAML file, then compile it into a real dataset folder and run the official BIDS validator on it. You edit the YAML, not the dataset files.
 
