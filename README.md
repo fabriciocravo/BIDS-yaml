@@ -2,6 +2,8 @@
 
 Write a BIDS dataset as a single YAML file, then compile it into a real dataset folder and run the official BIDS validator on it. You edit the YAML, not the dataset files.
 
+This project is currently on early development stages, any feedback or bug reports are highly appreciated.
+
 ## Repos functionalities
 
 1. **Compiles** a YAML file from `dataset_yamls/` into a BIDS dataset in `dataset_cache/`.
