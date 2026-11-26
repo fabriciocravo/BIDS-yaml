@@ -11,16 +11,6 @@ Write a BIDS dataset as a single YAML file, then compile it into a real dataset 
 
 ## Requirements
 
-| Tool | Version | Used for |
-|---|---|---|
-| Python | 3.10 or newer, with `venv` and `pip` | Running `bids-yaml.py` and building the schema |
-| git | any recent version | Cloning the BIDS specification |
-| deno | any recent version | Running the validator |
-| Python packages | `pandas`, `PyYAML` (see `requirements.txt`) | Reading YAML and writing TSV files |
-| Network access | `github.com`, `pypi.org`, `jsr.io`, `deno.land` | Cloning, installing, and fetching the validator |
-
-## Requirements
-
 ### 1. Python 3.10+ and pip
 
 - **macOS:** `brew install python` (or use the python.org installer). Check with `python3 --version`.
