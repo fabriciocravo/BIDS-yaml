@@ -54,7 +54,6 @@ Check with `deno --version`. If the command isn't found and you used pip, add `~
 git clone https://github.com/fabriciocravo/BIDS-yaml.git
 ```
 
-Replace `<repo-url>` with the repository's GitHub URL
 
 ## Usage
 
