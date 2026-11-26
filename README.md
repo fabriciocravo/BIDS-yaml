@@ -19,9 +19,7 @@ Write a BIDS dataset as a single YAML file, then compile it into a real dataset 
 | Python packages | `pandas`, `PyYAML` (see `requirements.txt`) | Reading YAML and writing TSV files |
 | Network access | `github.com`, `pypi.org`, `jsr.io`, `deno.land` | Cloning, installing, and fetching the validator |
 
-## Installation
-
-Run these from the repo root after cloning.
+## Requirements
 
 ### 1. Python 3.10+ and pip
 
@@ -48,13 +46,15 @@ Check with `python3 -c "import pandas, yaml"`. No output means it worked.
 
 Check with `deno --version`. If the command isn't found and you used pip, add `~/.local/bin` to your `PATH`. The workflow itself uses `PATH="$HOME/.local/bin:$PATH"` to handle this.
 
-### 5. Clone this repo
+## Installation
+
+### Clone this repo
 
 ```bash
 git clone https://github.com/fabriciocravo/BIDS-yaml.git
 ```
 
-Replace `<repo-url>` with the repository's GitHub URL. The `cd` step makes the repo root your working folder for the install and usage commands below.
+Replace `<repo-url>` with the repository's GitHub URL
 
 ## Usage
 
